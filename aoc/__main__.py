@@ -13,6 +13,7 @@ def scaffold_solution(year: int, day: int):
 
     base_solution = """from aoc.lib.base_solution import BaseSolution
 
+
 class Solution(BaseSolution):
     def setup(self):
         pass
@@ -56,6 +57,7 @@ def run_solution(year: int, day: int):
     module = importlib.import_module(f"aoc.solutions.y{year}d{day:02d}")
     solution = module.Solution(input_path.read_text().strip())
 
+    solution.setup()
     print(solution.part_one())
     print(solution.part_two())
 
