@@ -4,6 +4,27 @@ import os
 import pathlib
 import urllib.request
 
+BASE_DIR = pathlib.Path(__file__).parent.resolve()
+
+def scaffold_solution(year: int, day: int):
+    solution_path = BASE_DIR / "solutions" / f"y{year}d{day:02d}.py"
+    if solution_path.exists():
+        return
+
+    base_solution = """from aoc.lib.base_solution import BaseSolution
+
+class Solution(BaseSolution):
+    def setup(self):
+        pass
+
+    def part_one(self):
+        pass
+
+    def part_two(self):
+        pass"""
+
+    solution_path.parent.mkdir(parents=True, exist_ok=True)
+    solution_path.write_text(base_solution)
 
 def get_input_path(year: int, day: int):
     return pathlib.Path(__file__).parent.resolve() / "inputs" / f"y{year}d{day:02d}.txt"
@@ -27,11 +48,12 @@ def download_input(year: int, day: int):
     output_path.write_text(data.decode("utf-8"))
 
 def run_solution(year: int, day: int):
+    scaffold_solution(year, day)
     input_path = get_input_path(year, day)
     if not input_path.exists():
         download_input(year, day)
 
-    module = importlib.import_module(f"aoc.solutions.y{2023}d{day:02d}")
+    module = importlib.import_module(f"aoc.solutions.y{year}d{day:02d}")
     solution = module.Solution(input_path.read_text().strip())
 
     print(solution.part_one())
