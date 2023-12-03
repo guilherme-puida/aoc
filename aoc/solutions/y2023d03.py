@@ -5,80 +5,66 @@ import re
 
 class Solution(BaseSolution):
     def setup(self):
-        self.height = len(self.lines)
         self.width = len(self.lines[0])
-        pass
+
+        self.numbers = {}
+
+        sanitized_input = self.input_str.replace("\n", "")
+
+        for number in re.finditer(r"(\d+)", sanitized_input):
+            n = int(number.group())
+            start, end = number.span()
+            for i in range(start, end):
+                self.numbers[i] = (n, start)
+
+        self.symbols = {}
+
+        for sym in re.finditer(r"([^\.0-9])", sanitized_input):
+            start, _ = sym.span()
+            self.symbols[start] = sym.group()
 
     def part_one(self):
-        total = 0
+        numbers = set()
 
-        numbers = re.finditer(r"(\d+)", ''.join(self.lines))
-
-        for number in numbers:
-            n_len = len(number.group())
-            start, _ = number.span()
-
+        for start, sym in self.symbols.items():
             row, col = divmod(start, self.width)
 
-            spots = [
-                (row, col + n_len),
-                (row, col - 1),
-                *[(row - 1, col + c) for c in range(-1, n_len + 1)],
-                *[(row + 1, col + c) for c in range(-1, n_len + 1)],
-            ]
+            for index in self.around(row, col):
+                if index in self.numbers:
+                    numbers.add(self.numbers[index])
 
-            if any(self.is_sym(*x) for x in spots):
-                total += int(number.group())
-
-        return total
+        return sum(val for val, _ in numbers)
 
     def part_two(self):
-        numbers = {}
-
-        for number in re.finditer(r"(\d+)", ''.join(self.lines)):
-            n = number.group()
-            for i in range(*number.span()):
-                numbers[i] = int(n)
-
         total = 0
 
-        for gear in re.finditer(r"(\*)", "".join(self.lines)):
-            start, _ = gear.span()
+        for start, sym in self.symbols.items():
+            if sym != "*":
+                continue
+
+            numbers = set()
             row, col = divmod(start, self.width)
 
-            around = [
-                (row - 1, col - 1),
-                (row - 1, col),
-                (row - 1, col + 1),
-                (row, col - 1),
-                (row, col + 1),
-                (row + 1, col - 1),
-                (row + 1, col),
-                (row + 1, col + 1),
-            ]
+            for index in self.around(row, col):
+                if index in self.numbers:
+                    numbers.add(self.numbers[index])
 
-            n_around = []
-            for nrow, ncol in around:
-                if nrow not in range(self.height):
-                    continue
-                if ncol not in range(self.width):
-                    continue
-
-                pp = nrow * self.width + ncol
-                if pp in numbers:
-                    n_around.append(numbers[pp])
-
-            n_around = list(set(n_around))
-            if len(n_around) == 2:
-                total += n_around[0] * n_around[1]
+            if len(numbers) == 2:
+                (n1, _), (n2, _) = numbers
+                total += n1 * n2
 
         return total
 
-    def is_sym(self, row, col):
-        if row not in range(self.height):
-            return False
-        if col not in range(self.width):
-            return False
+    def around(self, row, col):
+        a = [
+            (row - 1, col - 1),
+            (row - 1, col),
+            (row - 1, col + 1),
+            (row, col - 1),
+            (row, col + 1),
+            (row + 1, col - 1),
+            (row + 1, col),
+            (row + 1, col + 1),
+        ]
 
-        c = self.lines[row][col]
-        return c not in '.0123456789'
+        return [p * self.width + c for p, c in a]
