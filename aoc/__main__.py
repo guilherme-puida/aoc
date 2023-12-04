@@ -1,10 +1,18 @@
 import argparse
+import contextlib
 import importlib
 import os
 import pathlib
+import time
 import urllib.request
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
+
+@contextlib.contextmanager
+def timer():
+    start_time = end_time = time.perf_counter()
+    yield lambda: end_time - start_time
+    end_time = time.perf_counter()
 
 def scaffold_solution(year: int, day: int):
     solution_path = BASE_DIR / "solutions" / f"y{year}d{day:02d}.py"
@@ -57,9 +65,17 @@ def run_solution(year: int, day: int):
     module = importlib.import_module(f"aoc.solutions.y{year}d{day:02d}")
     solution = module.Solution(input_path.read_text().strip())
 
-    solution.setup()
-    print(solution.part_one())
-    print(solution.part_two())
+    with timer() as setup_time:
+        solution.setup()
+    print(f"Setup took {setup_time():.6f} seconds.")
+
+    with timer() as part_one_time:
+        part_one_result = solution.part_one()
+    print(f"Part one: {part_one_result} in {part_one_time():.6f} seconds.")
+
+    with timer() as part_two_time:
+        part_two_result = solution.part_two()
+    print(f"Part two: {part_two_result} in {part_two_time():.6f} seconds.")
 
 def main():
     parser = argparse.ArgumentParser(description="Advent of Code helper")
