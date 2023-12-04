@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import dataclasses
 import enum
 
@@ -32,7 +34,9 @@ class Point:
     def origin(cls):
         return cls(0, 0)
 
-    def move(self, direction: Direction) -> Self:
+    def move(self, direction: Direction, amount=1) -> Self:
         x_off, y_off = direction.to_offset()
-        return Point(self.x + x_off, self.y + y_off)
+        return Point(self.x + (x_off * amount), self.y + (y_off * amount))
         
+    def manhattan_distance(self, other: Point) -> Self:
+        return abs(self.x - other.x) + abs(self.y - other.y)
