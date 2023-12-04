@@ -21,3 +21,11 @@ python -m aoc run <year> <day>
 ```
 
 Solutions are stored in `aoc/solutions/yYYYYdNN.py`.
+
+### Run and Test
+
+```shell
+python -m aoc runall
+```
+
+This runs and tests all implemented solutions.
