@@ -5,7 +5,7 @@ import itertools
 
 class Solution(BaseSolution):
     result_one = 980499
-    result_two = 200637466
+    result_two = 200637446
 
     def setup(self):
         self.numbers = list(map(int, self.lines))
