@@ -2,6 +2,9 @@ from aoc.lib.base_solution import BaseSolution
 
 
 class Solution(BaseSolution):
+    result_one = 1606483
+    result_two = 3842356
+
     def setup(self):
         self.dimensions = [tuple(map(int, line.split("x"))) for line in self.lines]
 

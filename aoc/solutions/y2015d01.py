@@ -2,6 +2,9 @@ from aoc.lib.base_solution import BaseSolution
 
 
 class Solution(BaseSolution):
+    result_one = 280
+    result_two = 1797
+
     def setup(self):
         self.floors = [0]
 

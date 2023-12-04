@@ -10,6 +10,9 @@ def direction_from_char(char: str) -> Direction:
         case "L": return Direction.WEST
 
 class Solution(BaseSolution):
+    result_one = 865
+    result_two = 35038
+
     def setup(self):
         def parse_instructions(instructions):
             result = []

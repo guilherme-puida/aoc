@@ -32,6 +32,9 @@ class Intcode:
                 
 
 class Solution(BaseSolution):
+    result_one = 10566835
+    result_two = 2347
+
     def setup(self):
         pass
 

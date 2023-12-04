@@ -9,6 +9,9 @@ line_regex = re.compile(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)")
 
 
 class Solution(BaseSolution):
+    result_one = 117505
+    result_two = 1254
+
     def setup(self):
         self.squares = {}
         for line in self.lines:

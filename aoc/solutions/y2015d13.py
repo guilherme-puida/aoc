@@ -9,6 +9,9 @@ line_regex = re.compile(r"(\w+) would (\w+) (\d+) happiness units by sitting nex
 
 
 class Solution(BaseSolution):
+    result_one = 664
+    result_two = 640
+
     def setup(self):
         self.graph = collections.defaultdict(int)
         self.people = set()

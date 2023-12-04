@@ -4,6 +4,9 @@ import itertools
 
 
 class Solution(BaseSolution):
+    result_one = 329356
+    result_two = 4666278
+
     def setup(self):
         pass
 

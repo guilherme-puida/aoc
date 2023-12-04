@@ -4,6 +4,9 @@ import json
 
 
 class Solution(BaseSolution):
+    result_one = 191164
+    result_two = 87842
+
     def setup(self):
         self.json = json.loads(self.input_str)
 

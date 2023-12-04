@@ -4,6 +4,9 @@ import collections
 
 
 class Solution(BaseSolution):
+    result_one = 21138
+    result_two = 7185540
+
     def setup(self):
         self.cards = []
 

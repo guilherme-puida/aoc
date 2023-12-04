@@ -8,6 +8,9 @@ command_regex = re.compile(r"(turn on|turn off|toggle) (\d+),(\d+) through (\d+)
 
 
 class Solution(BaseSolution):
+    result_one = 377891
+    result_two = 14110788
+
     def setup(self):
         self.commands = []
         for line in self.lines:

@@ -2,6 +2,9 @@ from aoc.lib.base_solution import BaseSolution
 
 
 class Solution(BaseSolution):
+    result_one = 1119
+    result_two = 1420
+    
     def setup(self):
         self.input_len = len(self.input_str)
         pass

@@ -4,6 +4,9 @@ import itertools
 
 
 class Solution(BaseSolution):
+    result_one = 51833
+    result_two = 288
+
     def setup(self):
         self.numbers = []
 

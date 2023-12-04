@@ -4,6 +4,9 @@ import hashlib
 
 
 class Solution(BaseSolution):
+    result_one = 346386
+    result_two = 9958218
+
     def setup(self):
         pass
 

@@ -12,6 +12,9 @@ max_amount = {
 }
 
 class Solution(BaseSolution):
+    result_one = 2879
+    result_two = 65122
+
     def part_one(self):
         total = 0
 

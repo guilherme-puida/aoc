@@ -2,6 +2,9 @@ from aoc.lib.base_solution import BaseSolution
 
 
 class Solution(BaseSolution):
+    result_one = 54605
+    result_two = 55429
+
     def part_one(self):
         return self.solve(self.lines)
 

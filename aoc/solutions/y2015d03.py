@@ -3,6 +3,9 @@ from aoc.lib.space import Point, Direction
 
 
 class Solution(BaseSolution):
+    result_one = 2572
+    result_two = 2631
+
     def setup(self):
         pass
 

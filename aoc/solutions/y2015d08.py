@@ -2,6 +2,9 @@ from aoc.lib.base_solution import BaseSolution
 
 
 class Solution(BaseSolution):
+    result_one = 1333
+    result_two = 2046
+
     def setup(self):
         pass
 

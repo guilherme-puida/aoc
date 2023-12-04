@@ -4,6 +4,9 @@ import re
 
 
 class Solution(BaseSolution):
+    result_one = 533784
+    result_two = 78826761
+
     def setup(self):
         self.width = len(self.lines[0])
 

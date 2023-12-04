@@ -2,6 +2,9 @@ from aoc.lib.base_solution import BaseSolution
 
 
 class Solution(BaseSolution):
+    result_one = 3231941
+    result_two = 4845049
+
     def setup(self):
         self.modules = list(map(int, self.lines))
 

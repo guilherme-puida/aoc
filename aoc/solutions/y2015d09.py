@@ -8,6 +8,9 @@ path_regex = re.compile(r"(\w+) to (\w+) = (\d+)")
 
 
 class Solution(BaseSolution):
+    result_one = 251
+    result_two = 898
+
     def setup(self):
         graph = {}
         cities = set()

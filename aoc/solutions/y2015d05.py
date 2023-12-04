@@ -4,6 +4,9 @@ import re
 
 
 class Solution(BaseSolution):
+    result_one = 258
+    result_two = 53
+
     def setup(self):
         pass
 

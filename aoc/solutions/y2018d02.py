@@ -5,6 +5,9 @@ import itertools
 
 
 class Solution(BaseSolution):
+    result_one = 8820
+    result_two = "bpacnmglhizqygfsjixtkwudr"
+
     def setup(self):
         pass
 

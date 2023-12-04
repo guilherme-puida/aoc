@@ -4,6 +4,9 @@ import functools
 
 
 class Solution(BaseSolution):
+    result_one = 3176
+    result_two = 14710
+
     def setup(self):
         self.data = {}
 
@@ -13,7 +16,7 @@ class Solution(BaseSolution):
 
     def part_one(self):
         self.result = str(self.evaluate("a"))
-        return self.result
+        return int(self.result)
 
     def part_two(self):
         if not self.result:
