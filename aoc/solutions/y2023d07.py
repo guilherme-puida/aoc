@@ -3,12 +3,6 @@ from aoc.lib.base_solution import BaseSolution
 import collections
 
 
-def get_card_value(card):
-    return "23456789TJQKA".index(card)
-
-def get_card_value_joker(card):
-    return "J23456789TQKA".index(card)
-
 def get_hand_type(hand):
     counter = collections.Counter(hand)
     if len(counter) == 1:
@@ -25,7 +19,6 @@ def get_hand_type_joker(hand):
     joker_count = counter["J"]
     del counter["J"]
 
-    # four of a kind -> five of a kind
     if not counter or len(counter) == 1:
         return 6
 
@@ -34,7 +27,11 @@ def get_hand_type_joker(hand):
 
     return [(1, 1), (2, 1), (2, 2), (3, 1), (3, 2), (4, 1)].index((hi, lo))
 
+
 class Solution(BaseSolution):
+    result_one = 249204891 
+    result_two = 249666369 
+
     def setup(self):
         self.hands = []
 
@@ -42,36 +39,24 @@ class Solution(BaseSolution):
             cards, bid = line.split()
             self.hands.append((cards, int(bid)))
 
-    def part_one(self):
-        sortable_entries = []
+    def solve(self, card_order, hand_type_fn):
+        entries = []
 
         for cards, bid in self.hands:
-            hand_type = get_hand_type(cards)
-            card_values = [get_card_value(x) for x in cards]
+            hand_type = hand_type_fn(cards)
+            counter = collections.Counter(cards)
+            card_values = [card_order.index(x) for x in cards]
             entry = (bid, (hand_type, *card_values))
-            sortable_entries.append(entry)
+            entries.append(entry)
 
-        entries = sorted(sortable_entries, key=lambda x: x[1])
+        entries = sorted(entries, key=lambda x: x[1])
 
-        total = 0
-        for i, (bid, _) in enumerate(entries):
-            total += (i + 1) * bid
+        return sum(
+            (i + 1) * bid for i, (bid, _) in enumerate(entries)
+        )
 
-        return total
+    def part_one(self):
+        return self.solve("23456789TJQKA", get_hand_type)
 
     def part_two(self):
-        sortable_entries = []
-
-        for cards, bid in self.hands:
-            hand_type = get_hand_type_joker(cards)
-            card_values = [get_card_value_joker(x) for x in cards]
-            entry = (bid, (hand_type, *card_values))
-            sortable_entries.append(entry)
-
-        entries = sorted(sortable_entries, key=lambda x: x[1])
-
-        total = 0
-        for i, (bid, _) in enumerate(entries):
-            total += (i + 1) * bid
-
-        return total
+        return self.solve("J23456789TQKA", get_hand_type_joker)
