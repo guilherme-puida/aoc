@@ -1,11 +1,13 @@
 from aoc.lib.base_solution import BaseSolution
 
+import functools
+
 
 class Solution(BaseSolution):
     result_one = 7670
     result_two = 157383940585037 
 
-    def setup(
+    def setup(self):
         self.entries = []
 
         for line in self.lines:
